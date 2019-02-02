@@ -1,17 +1,16 @@
 # SoftEther VPN server
 
-FROM debian:8
-MAINTAINER Frank Rosquin <frank.rosquin@gmail.com>
+FROM debian:9
+LABEL maintainer="jedduff@gmail.com" description="Softether beta for armhf architecture"
 
 ENV VERSION v4.28-9669-beta-2018.09.11
 WORKDIR /usr/local/vpnserver
-
 
 RUN apt-get update &&\
         apt-get -y -q install iptables gcc make wget && \
         apt-get clean && \
         rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
-        wget http://www.softether-download.com/files/softether/${VERSION}-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-${VERSION}-linux-x64-64bit.tar.gz -O /tmp/softether-vpnserver.tar.gz &&\
+        wget http://www.softether-download.com/files/softether/${VERSION}-tree/Linux/SoftEther_VPN_Server/32bit_-_ARM_EABI/softether-vpnserver-${VERSION}-linux-arm_eabi-32bit.tar.gz -O /tmp/softether-vpnserver.tar.gz &&\
         tar -xzvf /tmp/softether-vpnserver.tar.gz -C /usr/local/ &&\
         rm /tmp/softether-vpnserver.tar.gz &&\
         make i_read_and_agree_the_license_agreement &&\
